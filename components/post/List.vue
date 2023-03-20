@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { usePostStore } from '@/stores/post'
 
-const { t } = useI18n()
 const postStore = usePostStore()
 
 const isLoading = ref(false)
 
+postStore.getPosts()
+
+
 onMounted(async() => {
   if (!postStore.total) {
     isLoading.value = true
-    await postStore.getPosts()
+    // await postStore.getPosts()
     isLoading.value = false
   }
 })
 
 async function loadMore() {
-  await postStore.getPosts()
+  // await postStore.getPosts()
 }
 
 </script>
@@ -23,7 +25,7 @@ async function loadMore() {
 <template>
   <div class="container">
     <h2 class="mb-3">
-      {{ t("POSTS__LIST_TITLE") }}
+      {{ $t("POSTS") }}
     </h2>
     <transition name="fade" mode="out-in">
       <div v-if="isLoading">

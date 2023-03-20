@@ -9,7 +9,7 @@ const avatarImageError = ref(false)
   <div class="flex items-center">
     <div v-if="avatarUrl && !avatarImageError" class="user-avatar">
       <img
-        class="asset-team-maintainers__avatar__image"
+        class="user-avatar__image"
         :src="avatarUrl"
         loading="lazy"
         @error="avatarImageError = true"

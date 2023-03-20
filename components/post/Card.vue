@@ -12,14 +12,14 @@ const currencySymbol = computed(() => t(`CURRENCY_${props.post.currency}`))
 </script>
 
 <template>
-  <div
-    :to="{ name: 'post', params: { id: post.id } }"
+  <NuxtLink
+    :to="`post/${post.id}`"
     class="block no-outline border border-solid border-silver border-rounded-lg max-w-xl"
   >
     <!-- Header -->
     <div class="flex items-center p-2 pr-4">
       <UserAvatar :avatar-url="post.sellerAvatarUrl" />
-      <p class="fw-bold ml-2">
+      <p class="fw-bold ml-2 truncate-1">
         {{ post.sellerCompanyName }}
       </p>
       <div class="i-mdi-share-variant ml-auto" />
@@ -47,5 +47,5 @@ const currencySymbol = computed(() => t(`CURRENCY_${props.post.currency}`))
         </p>
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>

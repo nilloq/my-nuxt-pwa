@@ -6,6 +6,5 @@ import UserAvatar from '~~/components/post/user/UserAvatar.vue';
     <h1 class="fw-bold">
       {{ $t("WELCOME") }}
     </h1>
-    <PostList />
   </div>
 </template>

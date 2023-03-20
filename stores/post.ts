@@ -20,9 +20,9 @@ export const usePostStore = defineStore('post', {
     async getPosts() {
       // const globalStore = useGlobalStore()
       // const { total, posts } = await PostService.get({ country: globalStore.country ?? '', offset: this.posts.length })
-      const { total, posts } = await PostService.get({ country: 'CI', offset: this.posts.length })
+      const { total, posts } = await PostService.get()
       this.total = total
-      this.posts.push(...posts)
+      this.posts = [...posts]
     }
   }
 })

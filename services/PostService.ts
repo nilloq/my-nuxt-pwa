@@ -1,32 +1,28 @@
 
-import announcementApi from '@/api/AnnouncementApi'
-import type { AnnouncementDto, GetAnnoucementApiResponse } from '@/api/dto/announcement.dto'
+// import announcementApi from '@/api/AnnouncementApi'
+import productApi from '@/api/ProductApi'
+import type { ProductDto, GetProductApiResponse } from '@/api/dto/product.dto'
 import type { Post, GetPostsResponse } from './model/post.model'
-import { useFile } from '@/composables/file'
-
-const { getCloudinaryImageUrl, getCloudinarySquareImageUrl } = useFile()
 
 class PostService {
 
-  static #toPost(announcementDto:AnnouncementDto):Post {
-    const imageList = announcementDto.images[0].length ? [getCloudinaryImageUrl(announcementDto.images[0])] : []
-    const sellerPicture = announcementDto.user?.picture ? getCloudinarySquareImageUrl(announcementDto.user?.picture) : ''
+  static #toPost(productDto:ProductDto):Post {
     return {
-      id: announcementDto.id ?? '0',
-      sellerCompanyName: announcementDto.user?.seller?.company_name ?? '',
-      sellerAvatarUrl: sellerPicture,
-      images: imageList,
-      description: announcementDto.text ?? '',
-      price: announcementDto.price,
-      priceOriginal: announcementDto.price_original,
-      currency: announcementDto.currency
+      id: productDto.id.toString(),
+      sellerCompanyName: productDto.title,
+      sellerAvatarUrl: productDto.thumbnail,
+      images: productDto.images,
+      description: productDto.description,
+      price: Math.round(productDto.price * (1 - productDto.discountPercentage / 100)),
+      priceOriginal: productDto.price,
+      currency: 'EUR'
     }
   }
 
-  async get({ country, limit = 5, offset = 0 }:{country: string, limit?:number, offset?: number}): Promise<GetPostsResponse> {
+  async get(): Promise<GetPostsResponse> {
     try {
-      const response:GetAnnoucementApiResponse = await announcementApi.get({ country, limit, offset })
-      return { total: response.total, posts: response.announcements.map(PostService.#toPost) }
+      const response:GetProductApiResponse = await productApi.get()
+      return { total: 100, posts: response.products.map(PostService.#toPost) }
     }
     catch {
       return { total: 0, posts: [] }

@@ -1,3 +1,9 @@
 {
-  "WELCOME": "Bienvenue sur ma PWA"
+  "ABOUT": "A propos de My PWA",
+  "WELCOME": "Bienvenue sur ma PWA",
+  "POSTS": "Articles",
+  "CURRENCY_EUR": "€",
+  "HEADER": {
+    "TITLE": "My Nuxt PWA"
+  }
 }
