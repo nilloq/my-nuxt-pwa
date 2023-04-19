@@ -64,18 +64,14 @@ export default defineNuxtConfig({
     client: false
   },
   i18n: {
+    defaultLocale: 'fr',
     langDir: 'lang',
     locales: [
-      { code: 'en', file: 'en.json' },
-      { code: 'fr', file: 'fr.json' }
+      { code: 'en', iso: 'en-GB', file: 'en.json' },
+      { code: 'fr', iso: 'fr-FR', file: 'fr.json' }
     ],
     lazy: true,
-    defaultLocale: 'fr',
-
-    vueI18n: {
-      legacy: false,
-      fallbackLocale: 'en'
-    }
+    vueI18n: './i18n.config.ts'
   },
   pinia: {
     autoImports: [
